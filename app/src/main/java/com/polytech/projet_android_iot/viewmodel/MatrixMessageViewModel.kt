@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.polytech.projet_android_iot.DispayMess
 import com.polytech.projet_android_iot.MyApiIOT
 import com.polytech.projet_android_iot.dao.UserIOTDao
 import com.polytech.projet_android_iot.model.UserIOT
@@ -15,7 +16,8 @@ import java.lang.Exception
 class MatrixMessageViewModel(
     val database: UserIOTDao,
     application: Application,
-    private var userID: Long // UID
+    private var userID: Long, // UID
+    private val boardID : Long // BID
 ) : AndroidViewModel(application){
 
     private var viewModelJob = Job()
@@ -37,8 +39,9 @@ class MatrixMessageViewModel(
 
     private fun displayMessageFromAPI(message: String): Boolean {
         var res = false
+        val messageObj = DispayMess(boardID,message)
         coroutineScope.launch {
-            var displayMessageDeferred = MyApiIOT.retrofitService.displayMessage(message)
+            var displayMessageDeferred = MyApiIOT.retrofitService.displayMessage(messageObj)
             try {
                 var msgResult = displayMessageDeferred.await()
                 res = msgResult

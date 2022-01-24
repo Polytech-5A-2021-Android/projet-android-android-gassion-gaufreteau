@@ -8,13 +8,15 @@ import androidx.lifecycle.MutableLiveData
 import com.polytech.projet_android_iot.MyApiIOT
 import com.polytech.projet_android_iot.dao.UserIOTDao
 import com.polytech.projet_android_iot.model.UserIOT
+import com.polytech.projet_android_iot.switchSD
 import kotlinx.coroutines.*
 import java.lang.Exception
 
 class PersoMatrixViewModel(
     val database: UserIOTDao,
     application: Application,
-    private var userID: Long // UID
+    private var userID: Long, // UID
+    private var boardID: Long // BID
 ) : AndroidViewModel(application){
 
     private var viewModelJob = Job()
@@ -32,8 +34,9 @@ class PersoMatrixViewModel(
 
     fun switchSoundDetFromAPI(b: Boolean): Boolean {
         var res = false
+        val switchSD = switchSD(boardID,b)
         coroutineScope.launch {
-            var switchSoundDetectorDeferred = MyApiIOT.retrofitService.switchSoundDetector(b)
+            var switchSoundDetectorDeferred = MyApiIOT.retrofitService.switchSoundDetector(switchSD)
             try {
                 var resSwitch = switchSoundDetectorDeferred.await()
                 res = resSwitch

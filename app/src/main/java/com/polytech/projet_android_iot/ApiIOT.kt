@@ -45,16 +45,16 @@ interface ApiIOT {
     fun changePwd(@Body changepwd: ChangePwd) : Deferred<UserIOT>
 
     @POST("createPreset")
-    fun createPreset(@Body preset: PresetsIOT) : Deferred<PresetsIOT>
+    fun createPreset(@Body preset: createPreset) : Deferred<PresetsIOT>
 
     @POST("usePreset")
-    fun usePreset(@Body presetId: Long) : Deferred<Boolean>
+    fun usePreset(@Body preset: usePreset) : Deferred<Boolean>
 
     @POST("displayMessage")
-    fun displayMessage(@Body message: String): Deferred<Boolean>
+    fun displayMessage(@Body message: DispayMess): Deferred<Boolean>
 
     @POST("soundDetector")
-    fun switchSoundDetector(@Body switch: Boolean): Deferred<Boolean>
+    fun switchSoundDetector(@Body switch: switchSD): Deferred<Boolean>
 
 }
 
@@ -72,4 +72,24 @@ data class ChangePwd(
     val userID: Long?,
     val new_password: String?,
     val old_password: String?
+)
+
+data class DispayMess(
+    val boardID: Long?,
+    val message: String?,
+)
+
+data class usePreset(
+    val boardID: Long?,
+    val presetID: Long?
+)
+
+data class createPreset(
+    val boardID: Long?,
+    val preset: PresetsIOT
+)
+
+data class switchSD(
+    val boardID: Long?,
+    val switch: Boolean
 )

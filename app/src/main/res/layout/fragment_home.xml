@@ -25,6 +25,7 @@
                 android:layout_marginBottom="16sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="32sp"
+                android:paddingBottom="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -42,6 +43,9 @@
                 android:id="@+id/bt_addBoard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:padding="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/li_boardlist" />
 
@@ -49,6 +53,8 @@
                 android:id="@+id/bt_params"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_addBoard" />
 

@@ -56,7 +56,7 @@ class RegisterRgbFragment : Fragment() {
 
         binding.apply {
             tvTitle.text = getString(R.string.registerRgbfrag)
-            tiRegisterName.hint = getString(R.string.presetname)
+            evRegisterName.hint = getString(R.string.presetname)
             btValidate.text = getString(R.string.validate)
         }
 
@@ -75,6 +75,8 @@ class RegisterRgbFragment : Fragment() {
                 var message = ""
                 if(errorCode==1L){
                     message = "Name already exists in this board presets"
+                }else if(errorCode==2L) {
+                    message = "Name is empty"
                 }
                 Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
             }

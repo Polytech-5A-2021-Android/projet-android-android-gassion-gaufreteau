@@ -41,16 +41,16 @@ class RegisterFragment : Fragment() {
 
         binding.apply {
             tvTitle.text = getString(R.string.register)
-            tiLogin.hint = getString(R.string.login)
-            tiPwd.hint = getString(R.string.password)
-            tiPwdCheck.hint = getString(R.string.passwordCheck)
+            evLogin.hint = getString(R.string.login)
+            evPwd.hint = getString(R.string.password)
+            evPwdCheck.hint = getString(R.string.passwordCheck)
             btValidate.text = getString(R.string.validate)
             rbMan.text = getString(R.string.man)
             rbWoman.text = getString(R.string.woman)
-            tiAddress.hint = getString(R.string.address)
-            tiFirstname.hint = getString(R.string.firstname)
-            tiLastname.hint = getString(R.string.lastname)
-            tiTown.hint = getString(R.string.town)
+            evAddress.hint = getString(R.string.address)
+            evFirstname.hint = getString(R.string.firstname)
+            evLastname.hint = getString(R.string.lastname)
+            evTown.hint = getString(R.string.town)
         }
 
         val spinner = binding.spCountries

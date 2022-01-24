@@ -12,8 +12,8 @@
     <string name="login">Login</string>
     <string name="password">Mot de passe</string>
     <string name="toconnect">Se connecter</string>
-    <string name="createacc">Créer un compte</string>
-    <string name="register">Créer un compte</string>
+    <string name="createacc"><u>Créer un compte</u></string>
+    <string name="register"><u>Créer un compte</u></string>
     <string name="passwordCheck">Confirmation du mot de passe</string>
     <string name="boardList">Liste des boards</string>
     <string name="connectBoard">Connecter un board</string>
@@ -25,7 +25,7 @@
     <string name="persomenu">Personnalisation</string>
     <string name="ledrgb">LED RGB</string>
     <string name="ledmatrix">Matrice RGB</string>
-    <string name="menuLED">Personnalisation des LED</string>
+    <string name="menuLED">Personnalisation LED</string>
     <string name="presets">Préréglages</string>
     <string name="colorPick">Choisir une couleur</string>
     <string name="presetsList">Liste des préréglages</string>

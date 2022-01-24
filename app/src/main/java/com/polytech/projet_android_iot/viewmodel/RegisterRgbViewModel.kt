@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.polytech.projet_android_iot.MyApiIOT
+import com.polytech.projet_android_iot.createPreset
 import com.polytech.projet_android_iot.dao.UserIOTDao
 import com.polytech.projet_android_iot.db.DatabaseIotBoard
 import com.polytech.projet_android_iot.db.DatabasePresets
@@ -81,8 +82,9 @@ class RegisterRgbViewModel(
 
 
     private fun createPresetFromAPI(preset: PresetsIOT) {
+        val createPreset = createPreset(boardID,preset)
         coroutineScope.launch {
-            var createPresetDeferred = MyApiIOT.retrofitService.createPreset(preset)
+            var createPresetDeferred = MyApiIOT.retrofitService.createPreset(createPreset)
             try {
                 var presetResult = createPresetDeferred.await()
                 Log.i("API -- NewPreset", "Result of preset creation, pid : " + presetResult.id)
@@ -136,6 +138,10 @@ class RegisterRgbViewModel(
 
             if(!checkValidity(name)) {
                 _errorRegistering.value = 1
+                return@launch
+            }
+            if(name.isEmpty()) {
+                _errorRegistering.value = 2
                 return@launch
             }
 

@@ -33,7 +33,7 @@ class PersoMatrixFragment : Fragment() {
         val args = PersoMatrixFragmentArgs.fromBundle(requireArguments())
         val uid = args.uid
         val bid = args.bid
-        viewModelFactory = PersoMatrixViewModelFactory(dataSource,application,uid)
+        viewModelFactory = PersoMatrixViewModelFactory(dataSource,application,uid,bid)
         viewModel = ViewModelProvider(this,viewModelFactory).get(PersoMatrixViewModel::class.java)
 
         binding.viewModel = viewModel

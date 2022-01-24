@@ -44,9 +44,9 @@ class ParamsFragment : Fragment() {
 
         binding.apply {
             tvTitle.text = getString(R.string.params)
-            tiOldPwd.hint = getString(R.string.oldpwd)
-            tiNewPwd.hint = getString(R.string.newpwd)
-            tiNewPwdCheck.hint = getString(R.string.newpwdcheck)
+            evOldPwd.hint = getString(R.string.oldpwd)
+            evNewPwd.hint = getString(R.string.newpwd)
+            evNewPwdCheck.hint = getString(R.string.newpwdcheck)
             btValidate.text = getString(R.string.validate)
         }
 

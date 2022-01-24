@@ -26,6 +26,7 @@
                 android:layout_marginBottom="16sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="32sp"
+                android:paddingBottom="20dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -34,8 +35,9 @@
                 android:id="@+id/ev_oldPwd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="20dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="@id/tv_guideline"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -51,7 +53,8 @@
                 android:id="@+id/ev_newPwd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="@id/tv_guideline"
+                android:padding="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ev_oldPwd">
 
@@ -68,7 +71,8 @@
                 android:id="@+id/ev_newPwdCheck"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="@id/tv_guideline"
+                android:padding="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ev_newPwd">
 
@@ -86,6 +90,10 @@
                 android:onClick="@{() -> viewModel.onValidateUpdate()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:padding="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ev_newPwdCheck" />
 

@@ -29,6 +29,7 @@
                     android:layout_marginBottom="16sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="32sp"
+                    android:paddingBottom="15dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +39,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="@id/tv_guideline"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_title">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -54,8 +55,10 @@
                     android:id="@+id/ev_firstname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="@id/tv_guideline"
+                    app:layout_constraintRight_toLeftOf="@id/ev_lastname"
                     app:layout_constraintTop_toBottomOf="@id/ev_login">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -69,17 +72,20 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ev_lastname"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@id/tv_guideline"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/ev_firstname"
                     app:layout_constraintTop_toBottomOf="@id/ev_login">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ti_lastname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={viewModel.user.lastname}"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:text="@={viewModel.user.lastname}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,8 +93,9 @@
                     android:id="@+id/rg_gender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="@id/tv_guideline"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ev_lastname">
 
                     <RadioButton
@@ -110,9 +117,11 @@
                     android:id="@+id/ev_pwd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@id/tv_guideline"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rg_gender">
+                    app:layout_constraintTop_toBottomOf="@id/rg_gender"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/ev_pwdCheck"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ti_pwd"
@@ -127,9 +136,11 @@
                     android:id="@+id/ev_pwdCheck"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@id/tv_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/rg_gender"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ev_pwd">
+                    app:layout_constraintLeft_toRightOf="@id/ev_pwd"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ti_pwdCheck"
@@ -147,6 +158,7 @@
                     android:layout_height="wrap_content"
                     android:datePickerMode="spinner"
                     android:calendarViewShown="false"
+                    android:paddingTop="10dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ev_pwdCheck"/>
@@ -155,6 +167,7 @@
                     android:id="@+id/sp_countries"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="10dp"
                     app:layout_constraintLeft_toLeftOf="@id/tv_guideline"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/dp_datePicker">
@@ -165,9 +178,11 @@
                     android:id="@+id/ev_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@id/tv_guideline"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/sp_countries">
+                    app:layout_constraintTop_toBottomOf="@id/sp_countries"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/ev_town"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ti_address"
@@ -182,9 +197,11 @@
                     android:id="@+id/ev_town"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="@id/tv_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/sp_countries"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ev_address">
+                    app:layout_constraintLeft_toRightOf="@id/ev_address"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ti_town"
@@ -200,6 +217,8 @@
                     android:onClick="@{() -> viewModel.onValidateRegister()}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ev_town" />
 

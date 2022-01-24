@@ -37,7 +37,7 @@ class MatrixMessageFragment : Fragment() {
         val args = MatrixMessageFragmentArgs.fromBundle(requireArguments())
         val uid = args.uid
         val bid = args.bid
-        viewModelFactory = MatrixMessageViewModelFactory(dataSource,application,uid)
+        viewModelFactory = MatrixMessageViewModelFactory(dataSource,application,uid,bid)
         viewModel = ViewModelProvider(this,viewModelFactory).get(MatrixMessageViewModel::class.java)
 
         binding.viewModel = viewModel

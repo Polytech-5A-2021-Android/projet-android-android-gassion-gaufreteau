@@ -10,6 +10,7 @@ import com.polytech.projet_android_iot.dao.UserIOTDao
 import com.polytech.projet_android_iot.db.DatabasePresets
 import com.polytech.projet_android_iot.model.PresetsIOT
 import com.polytech.projet_android_iot.model.UserIOT
+import com.polytech.projet_android_iot.usePreset
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -68,8 +69,9 @@ class PresetLEDViewModel(
 
     fun usePresetFromAPI(pid: Long): Boolean {
         var res = false
+        var usePreset = usePreset(boardID,pid)
         coroutineScope.launch {
-            var usePresetDeferred = MyApiIOT.retrofitService.usePreset(pid)
+            var usePresetDeferred = MyApiIOT.retrofitService.usePreset(usePreset)
             try {
                 var boolResult = usePresetDeferred.await()
                 Log.i("API -- Use of Presets", "Result of call : $boolResult")

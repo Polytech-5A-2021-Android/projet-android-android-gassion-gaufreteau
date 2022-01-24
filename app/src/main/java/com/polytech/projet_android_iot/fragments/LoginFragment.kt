@@ -39,8 +39,8 @@ class LoginFragment : Fragment() {
 
         binding.apply {
             tvTitle.text = getString(R.string.toconnect)
-            tiLogin.hint = getString(R.string.login)
-            tiPwd.hint = getString(R.string.password)
+            evLogin.hint = getString(R.string.login)
+            evPwd.hint = getString(R.string.password)
             btValidate.text = getString(R.string.validate)
             tvCreateacc.text = getString(R.string.createacc)
         }
