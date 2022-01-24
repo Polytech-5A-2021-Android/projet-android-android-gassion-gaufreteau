@@ -41,8 +41,8 @@ class PersoMenuViewModel(
      * The goal is to make to application usable without API
      */
     private suspend fun insertBaseBoards() {
-        val pretmp = PresetsIOT(1,1L,"Preset 1.1", 12,13,14)
-        val pretmp2 = PresetsIOT(2,2L, "Preset 1.2",0,15,20)
+        val pretmp = PresetsIOT(1,1L,"Preset 1.1")
+        val pretmp2 = PresetsIOT(2,2L, "Preset 1.2")
         withContext(Dispatchers.IO) {
             if(databasePresets.get(1)==null) {
                 databasePresets.insert(pretmp)

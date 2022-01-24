@@ -16,9 +16,9 @@ class RGBPickerViewModel(
     private var userID: Long // UID
 ) : AndroidViewModel(application){
 
-    private var colorPicked1 = 0
-    private var colorPicked2 = 0
-    private var colorPicked3 = 0
+    private var colorPicked1 = ""
+    private var colorPicked2 = ""
+    private var colorPicked3 = ""
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val _user = MutableLiveData<UserIOT>()
@@ -43,7 +43,7 @@ class RGBPickerViewModel(
         }
     }
 
-    fun setColor(led: Int, color: Int) {
+    fun setColor(led: Int, color: String) {
         when (led) {
             1 -> colorPicked1 = color
             2 -> colorPicked2 = color
@@ -51,13 +51,13 @@ class RGBPickerViewModel(
         }
     }
 
-    fun getColor(led: Int): Int {
+    fun getColor(led: Int): String {
         when (led) {
             1 -> return colorPicked1
             2 -> return colorPicked2
             3 -> return colorPicked3
         }
-        return 0
+        return ""
     }
 
     override fun onCleared() {

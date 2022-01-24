@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.polytech.projet_android_iot.dao.PresetsIOTDao
 import com.polytech.projet_android_iot.model.PresetsIOT
 
-@Database(entities = [PresetsIOT::class], version = 4, exportSchema = false)
+@Database(entities = [PresetsIOT::class], version = 5, exportSchema = false)
 abstract class DatabasePresets : RoomDatabase() {
     abstract val presetsIOTDao: PresetsIOTDao
     companion object {

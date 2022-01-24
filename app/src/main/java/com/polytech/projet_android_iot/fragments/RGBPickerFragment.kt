@@ -53,9 +53,9 @@ class RGBPickerFragment : Fragment() {
 
         //CP 1
         val colorPickerDialog1 = ColorPickerDialog.createColorPickerDialog(activity)
-        colorPickerDialog1.setOnColorPickedListener { color, _ ->
+        colorPickerDialog1.setOnColorPickedListener { color, hex ->
             binding.tvColor1.setBackgroundColor(color)
-            viewModel.setColor(1,color)
+            viewModel.setColor(1,hex)
         }
         binding.btOpenpicker1.setOnClickListener {
             colorPickerDialog1.show();
@@ -63,9 +63,9 @@ class RGBPickerFragment : Fragment() {
 
         //CP2
         val colorPickerDialog2 = ColorPickerDialog.createColorPickerDialog(activity)
-        colorPickerDialog2.setOnColorPickedListener { color, _ ->
+        colorPickerDialog2.setOnColorPickedListener { color, hex ->
             binding.tvColor2.setBackgroundColor(color)
-            viewModel.setColor(2,color)
+            viewModel.setColor(2,hex)
         }
         binding.btOpenpicker2.setOnClickListener {
             colorPickerDialog2.show();
@@ -73,9 +73,9 @@ class RGBPickerFragment : Fragment() {
 
         //CP 3
         val colorPickerDialog3 = ColorPickerDialog.createColorPickerDialog(activity)
-        colorPickerDialog3.setOnColorPickedListener { color, _ ->
+        colorPickerDialog3.setOnColorPickedListener { color, hex ->
             binding.tvColor3.setBackgroundColor(color)
-            viewModel.setColor(3,color)
+            viewModel.setColor(3,hex)
         }
         binding.btOpenpicker3.setOnClickListener {
             colorPickerDialog3.show();

@@ -8,17 +8,23 @@ import androidx.databinding.Bindable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import com.polytech.projet_android_iot.BR
+import com.squareup.moshi.Json
 
 @Keep
 @Entity(tableName = "boardIOT")
 data class BoardIOT  (
+    @Json(name="id")
+    @SerializedName("id")
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private var _id: Long = 0L,
 
+    @Json(name="name")
+    @SerializedName("name")
     @ColumnInfo(name = "name")
-    private var _name: String? = "",
+    private var _name: String? = ""
 
 ): Parcelable,
     BaseObservable() {
@@ -37,11 +43,11 @@ data class BoardIOT  (
             notifyPropertyChanged(BR.name)
         }
 
-
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString(),
     )
+
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)

@@ -59,8 +59,8 @@ class RegisterFragment : Fragment() {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
+
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,

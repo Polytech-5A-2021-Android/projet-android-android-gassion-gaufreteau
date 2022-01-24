@@ -11,9 +11,9 @@ class RegisterRgbViewModelFactory(
     private val application: Application,
     private val uid: Long,
     private val bid: Long,
-    private val led1: Int,
-    private val led2: Int,
-    private val led3: Int,
+    private val led1: String,
+    private val led2: String,
+    private val led3: String,
     ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

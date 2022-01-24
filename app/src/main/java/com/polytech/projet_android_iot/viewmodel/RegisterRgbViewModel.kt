@@ -21,9 +21,9 @@ class RegisterRgbViewModel(
     application: Application,
     private var userID: Long, // UID
     private var boardID: Long, // BID
-    private val led1: Int,
-    private val led2: Int,
-    private val led3: Int,
+    private val led1: String,
+    private val led2: String,
+    private val led3: String,
 ) : AndroidViewModel(application){
 
     private val databasePresets = DatabasePresets.getInstance(application).presetsIOTDao
@@ -82,12 +82,14 @@ class RegisterRgbViewModel(
 
 
     private fun createPresetFromAPI(preset: PresetsIOT) {
-        val createPreset = createPreset(boardID,preset)
+        val createPreset = createPreset(preset.name!!,preset.led1!!,preset.led2!!,preset.led3!!)
         coroutineScope.launch {
-            var createPresetDeferred = MyApiIOT.retrofitService.createPreset(createPreset)
+            var createPresetDeferred = MyApiIOT.retrofitService.createPreset(preset)
             try {
                 var presetResult = createPresetDeferred.await()
-                Log.i("API -- NewPreset", "Result of preset creation, pid : " + presetResult.id)
+                Log.i("API -- NewPreset", "Result of preset creation, pid : " + presetResult.confirm)
+                noError()
+                _navigateToHomeFragment.value = preset.id
             }catch (e: Exception) {
                 Log.i("API ERROR -- NewPreset", "Exception with API -- Using local DB")
                 insertPreset(preset)

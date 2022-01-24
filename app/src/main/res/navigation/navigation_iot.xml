@@ -152,13 +152,13 @@
             app:argType="long" />
         <argument
             android:name="led1"
-            app:argType="integer" />
+            app:argType="string" />
         <argument
             android:name="led2"
-            app:argType="integer" />
+            app:argType="string" />
         <argument
             android:name="led3"
-            app:argType="integer" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/persoMatrixFragment"

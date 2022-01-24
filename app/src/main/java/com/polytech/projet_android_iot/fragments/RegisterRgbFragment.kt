@@ -65,7 +65,7 @@ class RegisterRgbFragment : Fragment() {
                 this.findNavController().navigate(
                     RegisterRgbFragmentDirections
                         .actionRegisterRgbFragmentToPersoMenuFragment(uid,bid))
-                Log.i("Navigating to HOME", "Successful insert - presetId : $presetId")
+                Log.i("Navigating to HOME", "Successful insert")
                 viewModel.doneNavigating()
             }
         })

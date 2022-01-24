@@ -71,4 +71,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.azeesoft.lib.colorpicker:colorpicker:1.0.8@aar'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
 }
