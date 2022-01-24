@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_iot"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.polytech.projet_android_iot.fragments.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.polytech.projet_android_iot.fragments.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.polytech.projet_android_iot.fragments.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_paramsFragment"
+            app:destination="@id/paramsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_boardConnectFragment"
+            app:destination="@id/boardConnectFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_persoMenuFragment"
+            app:destination="@id/persoMenuFragment" />
+        <argument
+            android:name="uid"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/paramsFragment"
+        android:name="com.polytech.projet_android_iot.fragments.ParamsFragment"
+        android:label="ParamsFragment"
+        tools:layout="@layout/fragment_params">
+        <action
+            android:id="@+id/action_paramsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="uid"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/boardConnectFragment"
+        android:name="com.polytech.projet_android_iot.fragments.BoardConnectFragment"
+        android:label="BoardConnectFragment"
+        tools:layout="@layout/fragment_boardconnect">
+        <action
+            android:id="@+id/action_boardConnectFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="uid"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/persoMenuFragment"
+        android:name="com.polytech.projet_android_iot.fragments.PersoMenuFragment"
+        android:label="PersoMenuFragment"
+        tools:layout="@layout/fragment_perso_menu">
+        <action
+            android:id="@+id/action_persoMenuFragment_to_persoLEDFragment"
+            app:destination="@id/persoLEDFragment" />
+        <action
+            android:id="@+id/action_persoMenuFragment_to_persoMatrixFragment"
+            app:destination="@id/persoMatrixFragment" />
+        <argument
+            android:name="uid"
+            app:argType="long" />
+        <argument
+            android:name="bid"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/persoLEDFragment"
+        android:name="com.polytech.projet_android_iot.fragments.PersoLEDFragment"
+        android:label="PersoLEDFragment"
+        tools:layout="@layout/fragment_perso_l_e_d">
+        <action
+            android:id="@+id/action_persoLEDFragment_to_presetLEDFragment"
+            app:destination="@id/presetLEDFragment" />
+        <action
+            android:id="@+id/action_persoLEDFragment_to_RGBPickerFragment"
+            app:destination="@id/RGBPickerFragment" />
+        <argument
+            android:name="uid"
+            app:argType="long" />
+        <argument
+            android:name="bid"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/presetLEDFragment"
+        android:name="com.polytech.projet_android_iot.fragments.PresetLEDFragment"
+        android:label="PresetLEDFragment"
+        tools:layout="@layout/fragment_preset_l_e_d">
+        <argument
+            android:name="uid"
+            app:argType="long" />
+        <argument
+            android:name="bid"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_presetLEDFragment_to_persoMenuFragment"
+            app:destination="@id/persoMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/RGBPickerFragment"
+        android:name="com.polytech.projet_android_iot.fragments.RGBPickerFragment"
+        android:label="RGBPickerFragment"
+        tools:layout="@layout/fragment_r_g_b_picker">
+        <action
+            android:id="@+id/action_RGBPickerFragment_to_registerRgbFragment"
+            app:destination="@id/registerRgbFragment" />
+        <action
+            android:id="@+id/action_RGBPickerFragment_to_persoMenuFragment"
+            app:destination="@id/persoMenuFragment" />
+        <argument android:name="uid"
+            app:argType="long" />
+        <argument
+            android:name="bid"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerRgbFragment"
+        android:name="com.polytech.projet_android_iot.fragments.RegisterRgbFragment"
+        android:label="RegisterRgbFragment"
+        tools:layout="@layout/fragment_register_rgb">
+        <action
+            android:id="@+id/action_registerRgbFragment_to_persoMenuFragment"
+            app:destination="@id/persoMenuFragment" />
+        <argument
+            android:name="uid"
+            app:argType="long" />
+        <argument
+            android:name="bid"
+            app:argType="long" />
+        <argument
+            android:name="led1"
+            app:argType="integer" />
+        <argument
+            android:name="led2"
+            app:argType="integer" />
+        <argument
+            android:name="led3"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/persoMatrixFragment"
+        android:name="com.polytech.projet_android_iot.fragments.PersoMatrixFragment"
+        android:label="PersoMatrixFragment"
+        tools:layout="@layout/fragment_perso_matrix">
+        <action
+            android:id="@+id/action_persoMatrixFragment_to_matrixMessageFragment"
+            app:destination="@id/matrixMessageFragment" />
+        <argument
+            android:name="uid"
+            app:argType="long" />
+        <argument
+            android:name="bid"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/matrixMessageFragment"
+        android:name="com.polytech.projet_android_iot.fragments.MatrixMessageFragment"
+        android:label="MatrixMessageFragment"
+        tools:layout="@layout/fragment_matrix_message">
+        <action
+            android:id="@+id/action_matrixMessageFragment_to_persoMenuFragment"
+            app:destination="@id/persoMenuFragment" />
+        <argument
+            android:name="uid"
+            app:argType="long" />
+        <argument
+            android:name="bid"
+            app:argType="long" />
+    </fragment>
+</navigation>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/activity_main_iotactivity.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/api_item_view.xml" value="0.1" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/board_item_view.xml" value="0.1921875" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_api_list.xml" value="0.1" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_boardConnect.xml" value="0.1" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_boardconnect.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_home.xml" value="0.190625" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_identity.xml" value="0.1" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_list.xml" value="0.1" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_matrix_message.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_nav_host.xml" value="0.1" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_params.xml" value="0.1" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_perso_l_e_d.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_perso_matrix.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_perso_menu.xml" value="0.1480978260869565" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_personal_data.xml" value="0.22" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_preset_l_e_d.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_r_g_b_picker.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_register.xml" value="0.190625" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_register_rgb.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/item_view.xml" value="0.1" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/presets_item_view.xml" value="1.59375" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
