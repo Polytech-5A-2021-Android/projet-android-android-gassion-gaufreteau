@@ -2,16 +2,15 @@ package com.polytech.projet_android_iot.viewmodel
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.polytech.projet_android_iot.LongConverter
+import com.polytech.projet_android_iot.MyApiIOT
 import com.polytech.projet_android_iot.dao.UserIOTDao
-import com.polytech.projet_android_iot.model.User
 import com.polytech.projet_android_iot.model.UserIOT
 import kotlinx.coroutines.*
+import java.lang.Exception
 
 class RegisterViewModel(
     val database: UserIOTDao,
@@ -28,6 +27,7 @@ class RegisterViewModel(
     val pwdCheck: LiveData<String>
         get() = _pwdCheck
 
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
     init {
         Log.i("RegisterViewModel", "created")
@@ -73,7 +73,7 @@ class RegisterViewModel(
     val errorRegistering: MutableLiveData<Long?>
         get() = _errorRegistering
 
-    fun noError() {
+    private fun noError() {
         _errorRegistering.value = null
     }
 
@@ -143,9 +143,8 @@ class RegisterViewModel(
                 return@launch
             }
 
-            val uid = insert(user)
-            noError()
-            _navigateToHomeFragment.value = uid
+            registerFromAPI(user)
+
         }
     }
 
@@ -154,7 +153,7 @@ class RegisterViewModel(
     }
 
     private suspend fun insert(user: UserIOT): Long {
-        var id = 0L
+        var id: Long
         withContext(Dispatchers.IO) {
             id = database.insert(user)
         }
@@ -165,6 +164,25 @@ class RegisterViewModel(
         return withContext(Dispatchers.IO) {
             val res = database.getByLogin(login)==null
             res
+        }
+    }
+
+    /**
+     * Register with API -- If no API, register into app DB
+     */
+    private fun registerFromAPI(user: UserIOT) {
+        coroutineScope.launch {
+            val registerDeferred = MyApiIOT.retrofitService.register(user)
+            try {
+                val registerResult = registerDeferred.await()
+                _user.value = registerResult
+                _navigateToHomeFragment.value = _user.value!!.id
+            }catch (e: Exception) {
+                Log.i("API ERROR -- Login", "Exception with API -- Using local DB")
+                val uid = insert(user)
+                noError()
+                _navigateToHomeFragment.value = uid
+            }
         }
     }
 }

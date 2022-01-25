@@ -32,19 +32,26 @@ class PersoMatrixViewModel(
         initializeUser()
     }
 
-    fun switchSoundDetFromAPI(b: Boolean): Boolean {
-        var res = false
+    fun switchSoundDetFromAPI(b: Boolean) {
         val switchSD = switchSD(boardID,b)
         coroutineScope.launch {
-            var switchSoundDetectorDeferred = MyApiIOT.retrofitService.switchSoundDetector(switchSD)
+            val switchSoundDetectorDeferred = MyApiIOT.retrofitService.switchSoundDetector(switchSD)
             try {
-                var resSwitch = switchSoundDetectorDeferred.await()
-                res = resSwitch
+                val resSwitch = switchSoundDetectorDeferred.await()
+                _res.value = resSwitch.confirm
             }catch (e: Exception) {
-
+                _res.value = false
             }
         }
-        return res
+    }
+
+    private val _res = MutableLiveData<Boolean?>()
+
+    val res: MutableLiveData<Boolean?>
+        get() = _res
+
+    fun doneNavigating() {
+        _res.value = null
     }
 
     private fun initializeUser() {

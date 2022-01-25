@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.polytech.projet_android_iot.model.BoardIOT
 import com.polytech.projet_android_iot.model.PresetsIOT
+import com.polytech.projet_android_iot.model.User
 import com.polytech.projet_android_iot.model.UserIOT
 import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
@@ -36,9 +37,6 @@ private var retrofit = Retrofit.Builder()
     .build()
 
 interface ApiIOT {
-    //TODO : GET OU POST puis déclaration de la fonction qui fait office d'API
-/*    @GET("realestate")
-    fun getProperties(): Deferred<List<MarsProperty>>*/
 
     @GET("presets/{bid}")
     fun getPresets(@Path("bid") bid: Long): Deferred<List<PresetsIOT>>
@@ -47,23 +45,28 @@ interface ApiIOT {
     fun getBoards(): Deferred<List<BoardIOT>>
 
     @POST("login")
-    fun login(@Body logInfo: LoginInfo) : Deferred<UserIOT>
+    fun login(@Body logInfo: LoginInfo) : Deferred<loginRet>
+
+    @POST("register")
+    fun register(@Body user: UserIOT) : Deferred<UserIOT>
 
     @POST("changePassword")
-    fun changePwd(@Body changepwd: ChangePwd) : Deferred<UserIOT>
-
+    fun changePwd(@Body changepwd: ChangePwd) : Deferred<boolRet>
 
     @POST("createPreset")
     fun createPreset(@Body createPreset: PresetsIOT) : Deferred<boolRet>
 
     @POST("usePreset")
-    fun usePreset(@Body preset: usePreset) : Deferred<Boolean>
+    fun usePreset(@Body presetID: Long?) : Deferred<boolRet>
+
+    @POST("useColors")
+    fun useColors(@Body preset: PresetsIOT) : Deferred<boolRet>
 
     @POST("displayMessage")
-    fun displayMessage(@Body message: DispayMess): Deferred<Boolean>
+    fun displayMessage(@Body message: DispayMess): Deferred<boolRet>
 
     @POST("soundDetector")
-    fun switchSoundDetector(@Body switch: switchSD): Deferred<Boolean>
+    fun switchSoundDetector(@Body switch: switchSD): Deferred<boolRet>
 
 }
 
@@ -90,6 +93,11 @@ data class boolRet(
     @Json(name="confirm") val confirm: Boolean
 )
 
+data class loginRet(
+    @Json(name="id") val id: Long,
+    @Json(name="response") val response: Boolean
+)
+
 data class LoginInfo(
     @SerializedName("login") val login: String?,
     @SerializedName("password") val password: String?
@@ -107,11 +115,6 @@ data class DispayMess(
     @SerializedName("message") val message: String?,
 )
 
-data class usePreset(
-    @SerializedName("boardID") val boardID: Long?,
-    @SerializedName("presetID") val presetID: Long?
-)
-
 
 data class createPreset(
     @SerializedName("name") val name: String,
@@ -123,5 +126,5 @@ data class createPreset(
 
 data class switchSD(
     @SerializedName("boardID") val boardID: Long?,
-    @SerializedName("switch") val switch: Boolean
+    @SerializedName("_switch") val switch: Boolean
 )

@@ -1,6 +1,7 @@
 package com.polytech.projet_android_iot.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +26,7 @@ class PersoMatrixFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         var soundDete = false
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
@@ -34,7 +35,7 @@ class PersoMatrixFragment : Fragment() {
         val uid = args.uid
         val bid = args.bid
         viewModelFactory = PersoMatrixViewModelFactory(dataSource,application,uid,bid)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(PersoMatrixViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[PersoMatrixViewModel::class.java]
 
         binding.viewModel = viewModel
 
@@ -57,14 +58,23 @@ class PersoMatrixFragment : Fragment() {
         }
 
         binding.btSoundDetector.setOnClickListener {
-            binding.btSoundDetector.text = if(soundDete) getString(R.string.activateSound) else getString(R.string.desactivateSound)
-            soundDete = !soundDete
-            val resApi = viewModel.switchSoundDetFromAPI(soundDete)
-            if(!resApi) {
-                val message = "Sound detector API call didn't work"
+            viewModel.switchSoundDetFromAPI(soundDete)
+        }
+
+        viewModel.res.observe(viewLifecycleOwner, { res ->
+            res?.let {
+                binding.btSoundDetector.text = if(soundDete) getString(R.string.activateSound) else getString(R.string.desactivateSound)
+                soundDete = !soundDete
+                var message = ""
+                if(res) {
+
+                    viewModel.doneNavigating()
+                }else{
+                    message = "Sound detector API call didn't work"
+                }
                 Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
             }
-        }
+        })
 
         return binding.root
     }

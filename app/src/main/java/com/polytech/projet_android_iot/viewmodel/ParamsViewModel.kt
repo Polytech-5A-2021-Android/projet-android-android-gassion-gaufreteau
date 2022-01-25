@@ -43,14 +43,13 @@ class ParamsViewModel(
     private fun changePwdFromAPI(oldPwd: String, newPwd: String){
         coroutineScope.launch {
             val changeObj = ChangePwd(userID,newPwd,oldPwd)
-            var changePwdDeferred = MyApiIOT.retrofitService.changePwd(changeObj)
+            val changePwdDeferred = MyApiIOT.retrofitService.changePwd(changeObj)
             try {
-                var objResult = changePwdDeferred.await()
-                if(objResult.id== _user.value!!.id) {
-                    _user.value = objResult
+                val objResult = changePwdDeferred.await()
+                if(objResult.confirm) {
                     noError()
-                    _navigateToHomeFragment.value = _user.value!!.id
-                }else _errorRegistering.value = 0
+                    _navigateToHomeFragment.value = userID
+                }
             }catch (e: Exception) {
                 Log.i("API ERROR -- ChangePwd", "Exception with API -- Using local DB")
                 val user = _user.value
@@ -108,13 +107,12 @@ class ParamsViewModel(
     fun onValidateUpdate() {
         uiScope.launch {
 
-            val user = user.value ?: return@launch
             val pwdCheck = pwdCheck.value ?: return@launch
             val newPwd = newPwd.value ?: return@launch
-            val oldPwd = oldPwd.value ?: return@launch
 
-            if(oldPwd.isEmpty())
-                return@launch
+            // Should be changed to apply to API
+
+
 
             if(pwdCheck.isEmpty())
                 return@launch
@@ -122,15 +120,11 @@ class ParamsViewModel(
             if(newPwd.isEmpty())
                 return@launch
 
-            if(oldPwd!=user.password) {
-                _errorRegistering.value = 2
-                return@launch
-            }
             if(pwdCheck != newPwd){
                 _errorRegistering.value = 1
                 return@launch
             }
-            changePwdFromAPI(newPwd,oldPwd)
+            changePwdFromAPI("", newPwd)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.polytech.projet_android_iot.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -23,6 +24,9 @@ class MyListAdapterPresets(
 
         fun bind(item: PresetsIOT, clickListener: PresetsListener) {
             binding.preset = item
+            binding.tvColor1.setBackgroundColor(Color.parseColor(item.led1))
+            binding.tvColor2.setBackgroundColor(Color.parseColor(item.led2))
+            binding.tvColor3.setBackgroundColor(Color.parseColor(item.led3))
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }

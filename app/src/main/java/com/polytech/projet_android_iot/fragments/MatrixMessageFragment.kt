@@ -48,13 +48,20 @@ class MatrixMessageFragment : Fragment() {
             btValidate.text = getString(R.string.validate)
         }
 
-        viewModel.navigateToHomeFragment.observe(viewLifecycleOwner, { uid ->
-            uid?.let {
-                this.findNavController().navigate(
-                    MatrixMessageFragmentDirections
-                        .actionMatrixMessageFragmentToPersoMenuFragment(uid,bid))
-                Log.i("Navigating to HOME", "Successful message")
-                viewModel.doneNavigating()
+        viewModel.navigateToHomeFragment.observe(viewLifecycleOwner, { res ->
+            res?.let {
+                var message = ""
+                if(res) {
+                    message = "Message printed"
+                    this.findNavController().navigate(
+                        MatrixMessageFragmentDirections.actionMatrixMessageFragmentToPersoMenuFragment(uid, bid)
+                    )
+                    Log.i("Navigating to HOME", "Successful message")
+                    viewModel.doneNavigating()
+                }else{
+                    message = "Message not printed, API encountered an issue"
+                }
+                Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -63,8 +70,6 @@ class MatrixMessageFragment : Fragment() {
                 var message = ""
                 if(errorCode==1L){
                     message = "Message field is Empty"
-                }else if(errorCode==2L){
-                    message = "Couldn't display message with API"
                 }
                 Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
             }

@@ -10,7 +10,6 @@ import com.polytech.projet_android_iot.dao.UserIOTDao
 import com.polytech.projet_android_iot.db.DatabasePresets
 import com.polytech.projet_android_iot.model.PresetsIOT
 import com.polytech.projet_android_iot.model.UserIOT
-import com.polytech.projet_android_iot.usePreset
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -30,6 +29,9 @@ class PresetLEDViewModel(
     private val _presets = MutableLiveData<List<PresetsIOT>>()
     val presets: LiveData<List<PresetsIOT>>
         get() = _presets
+    private val _resUse = MutableLiveData<Boolean??>()
+    val resUse: MutableLiveData<Boolean?>
+        get() = _resUse
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
@@ -67,20 +69,23 @@ class PresetLEDViewModel(
         }
     }
 
-    fun usePresetFromAPI(pid: Long): Boolean {
-        var res = false
-        var usePreset = usePreset(boardID,pid)
+    fun usePresetFromAPI(pid: Long) {
         coroutineScope.launch {
-            var usePresetDeferred = MyApiIOT.retrofitService.usePreset(usePreset)
+            val usePresetDeferred = MyApiIOT.retrofitService.usePreset(pid)
             try {
-                var boolResult = usePresetDeferred.await()
-                Log.i("API -- Use of Presets", "Result of call : $boolResult")
-                res = boolResult
-            }catch (e: Exception) {
+                val boolResult = usePresetDeferred.await()
+                Log.i("API -- Use of Presets", "Result of call : ${boolResult.confirm}")
+                _resUse.value = boolResult.confirm
+            } catch (e: Exception) {
                 Log.i("API -- Use Presets", "Exception with API")
+                _resUse.value = false
             }
         }
-        return res
+    }
+
+
+    fun doneNavigating() {
+        _resUse.value = null
     }
 
 

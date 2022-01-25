@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -62,12 +63,15 @@ class LoginFragment : Fragment() {
             )
         }
 
-/*        binding.btValidate.setOnClickListener {
-            this.findNavController().navigate(
-                LoginFragmentDirections.
-                        actionLoginFragmentToHomeFragment()
-            )
-        }*/
+        viewModel.errorLogin.observe(viewLifecycleOwner, { errorCode ->
+            errorCode?.let {
+                var message = ""
+                if (errorCode) {
+                    message = "User not recognized"
+                }
+                Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
+            }
+        })
 
         return binding.root
     }

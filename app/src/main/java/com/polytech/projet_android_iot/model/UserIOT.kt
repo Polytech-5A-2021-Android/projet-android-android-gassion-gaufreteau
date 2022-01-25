@@ -8,39 +8,50 @@ import androidx.databinding.Bindable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import com.polytech.projet_android_iot.BR
 
 @Keep
 @Entity(tableName = "userIOT")
 data class UserIOT  (
+    @SerializedName("id")
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private var _id: Long = 0L,
 
+    @SerializedName("login")
     @ColumnInfo(name = "login")
     private var _login: String? = "",
 
+    @SerializedName("password")
     @ColumnInfo(name = "password")
     private var _password: String? = "",
 
+    @SerializedName("firstname")
     @ColumnInfo(name = "firstname")
     private var _firstname: String? = "",
 
+    @SerializedName("lastname")
     @ColumnInfo(name = "lastname")
     private var _lastname: String? = "",
 
+    @SerializedName("address")
     @ColumnInfo(name = "address")
     private var _address: String? = "",
 
+    @SerializedName("town")
     @ColumnInfo(name = "town")
     private var _town: String? = "",
 
+    @SerializedName("country")
     @ColumnInfo(name = "country")
     private var _country: String? = "",
 
+    @SerializedName("birthday_date")
     @ColumnInfo(name = "birthday_date")
     private var _birthdayDate: Long = 0,
 
+    @SerializedName("gender")
     @ColumnInfo(name = "gender")
     private var _gender: String? = ""
 

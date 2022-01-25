@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -34,7 +35,7 @@ class RGBPickerFragment : Fragment() {
         val args = RGBPickerFragmentArgs.fromBundle(requireArguments())
         val uid = args.uid
         val bid = args.bid
-        viewModelFactory = RGBPickerViewModelFactory(dataSource,application,uid)
+        viewModelFactory = RGBPickerViewModelFactory(dataSource,application,uid,bid)
         viewModel = ViewModelProvider(this,viewModelFactory).get(RGBPickerViewModel::class.java)
 
         binding.viewModel = viewModel
@@ -82,12 +83,19 @@ class RGBPickerFragment : Fragment() {
         }
 
 
-
-        binding.btValidate.setOnClickListener {
-            this.findNavController().navigate(
-                RGBPickerFragmentDirections.actionRGBPickerFragmentToPersoMenuFragment(uid,bid)
-            )
-        }
+        viewModel.colors.observe(viewLifecycleOwner, { res ->
+            res?.let {
+                var message = ""
+                if(res) {
+                    message = "Successfully used colors"
+                    this.findNavController().navigate(RGBPickerFragmentDirections.actionRGBPickerFragmentToPersoMenuFragment(uid,bid))
+                    viewModel.doneNavigating()
+                }else{
+                    message = "Problem with selection of the colors"
+                }
+                Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
+            }
+        })
 
         binding.btRegister.setOnClickListener {
             this.findNavController().navigate(

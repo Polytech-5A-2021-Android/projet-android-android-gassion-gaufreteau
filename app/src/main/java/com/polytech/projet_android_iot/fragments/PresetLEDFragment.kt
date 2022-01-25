@@ -43,13 +43,19 @@ class PresetLEDFragment : Fragment() {
 
         val adapter = MyListAdapterPresets(PresetsListener { presetid ->
             Log.i("INFO -- Preset selected", "Preset choosen : $presetid")
-            val res = viewModel.usePresetFromAPI(presetid)
-            if(res) {
-                this.findNavController().navigate(
-                    PresetLEDFragmentDirections.actionPresetLEDFragmentToPersoMenuFragment(uid, bid)
-                )
-            }else{
-                val message = "Problem with selection of the preset"
+            viewModel.usePresetFromAPI(presetid)
+        })
+
+        viewModel.resUse.observe(viewLifecycleOwner, { res ->
+            res?.let {
+                var message = ""
+                if(res) {
+                    message = "Successfully used preset"
+                    this.findNavController().navigate(PresetLEDFragmentDirections.actionPresetLEDFragmentToPersoMenuFragment(uid,bid))
+                    viewModel.doneNavigating()
+                }else{
+                    message = "Problem with selection of the preset"
+                }
                 Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
             }
         })

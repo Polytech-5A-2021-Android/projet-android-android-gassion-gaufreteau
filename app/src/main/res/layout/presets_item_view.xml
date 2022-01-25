@@ -30,9 +30,35 @@
                 android:text="@{preset.name}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textSize="20sp"
+                app:layout_constraintHorizontal_bias="0.524"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/tv_color1"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_color1"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                app:layout_constraintHorizontal_bias="0.212"
+                app:layout_constraintLeft_toRightOf="@+id/tv_color2"
+                app:layout_constraintRight_toLeftOf="@+id/tv_name_item"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_color2"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                app:layout_constraintLeft_toRightOf="@+id/tv_color1"
+                app:layout_constraintRight_toLeftOf="@+id/tv_color3"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_color3"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                app:layout_constraintLeft_toRightOf="@+id/tv_color2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,12 +34,23 @@ class LoginViewModel(
             var loginDeferred = MyApiIOT.retrofitService.login(loginfo)
             try {
                 var loginResult = loginDeferred.await()
-                _user.value = loginResult
-                _navigateToHomeFragment.value = _user.value!!.id
+                if(loginResult.response) {
+                    noError()
+                    _navigateToHomeFragment.value = loginResult.id
+                }else{
+                    _errorLogin.value = true
+                    return@launch
+                }
             }catch (e: Exception) {
                 Log.i("API ERROR -- Login", "Exception with API -- Using local DB")
                 val uid = getUserLoginStatus(user.login,user.password)
-                _navigateToHomeFragment.value = uid
+                if(uid!=null) {
+                    _navigateToHomeFragment.value = uid
+                    noError()
+                }else{
+                    _errorLogin.value = true
+                    return@launch
+                }
             }
         }
     }
@@ -94,6 +105,15 @@ class LoginViewModel(
 
     fun doneNavigating() {
         _navigateToHomeFragment.value = null
+    }
+
+    private val _errorLogin = MutableLiveData<Boolean?>()
+
+    val errorLogin: MutableLiveData<Boolean?>
+        get() = _errorLogin
+
+    private fun noError() {
+        _errorLogin.value = null
     }
 
     fun onValidateIdentity() {

@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.polytech.projet_android_iot.DispayMess
 import com.polytech.projet_android_iot.MyApiIOT
 import com.polytech.projet_android_iot.dao.UserIOTDao
@@ -37,19 +36,18 @@ class MatrixMessageViewModel(
         initializeUser()
     }
 
-    private fun displayMessageFromAPI(message: String): Boolean {
-        var res = false
+    private fun displayMessageFromAPI(message: String) {
         val messageObj = DispayMess(boardID,message)
         coroutineScope.launch {
-            var displayMessageDeferred = MyApiIOT.retrofitService.displayMessage(messageObj)
+            val displayMessageDeferred = MyApiIOT.retrofitService.displayMessage(messageObj)
             try {
-                var msgResult = displayMessageDeferred.await()
-                res = msgResult
+                val msgResult = displayMessageDeferred.await()
+                _navigateToHomeFragment.value = msgResult.confirm
             }catch (e: Exception) {
                 Log.i("API -- Message", "Exception with API")
+                _navigateToHomeFragment.value = false
             }
         }
-        return res
     }
 
     private fun initializeUser() {
@@ -60,7 +58,7 @@ class MatrixMessageViewModel(
 
     private suspend fun getUser(): UserIOT? {
         return withContext(Dispatchers.IO) {
-            var user = database.get(userID)
+            val user = database.get(userID)
             user
         }
     }
@@ -84,9 +82,9 @@ class MatrixMessageViewModel(
         _errorRegistering.value = null
     }
 
-    private val _navigateToHomeFragment = MutableLiveData<Long?>()
+    private val _navigateToHomeFragment = MutableLiveData<Boolean?>()
 
-    val navigateToHomeFragment: MutableLiveData<Long?>
+    val navigateToHomeFragment: MutableLiveData<Boolean?>
         get() = _navigateToHomeFragment
 
     fun doneNavigating() {
@@ -100,13 +98,8 @@ class MatrixMessageViewModel(
                 _errorRegistering.value = 1
                 return@launch
             }
-            val res = displayMessageFromAPI(message)
-            if(!res) {
-                _errorRegistering.value = 2
-                return@launch
-            }
-            Log.i("INFO -- MESSAGE", message)
-            _navigateToHomeFragment.value = userID
+            displayMessageFromAPI(message)
+            noError()
         }
     }
 }
