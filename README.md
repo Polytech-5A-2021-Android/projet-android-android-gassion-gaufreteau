@@ -45,4 +45,4 @@ NB : L'utilisation de l'application sans API peut être un peu longue, car l'ex�
 
 ## Execution
 
-Voici une vidéo youtube montrant l'utilisation de l'application avec API : 
+Voici une vidéo youtube montrant l'utilisation de l'application avec API : https://youtu.be/t3mpLG7kAsE
