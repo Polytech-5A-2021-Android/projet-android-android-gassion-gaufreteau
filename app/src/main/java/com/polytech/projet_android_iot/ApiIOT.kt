@@ -55,7 +55,7 @@ interface ApiIOT {
     fun login(@Body logInfo: LoginInfo) : Deferred<loginRet>
 
     @POST("register")
-    fun register(@Body user: UserIOT) : Deferred<UserIOT>
+    fun register(@Body user: UserIOT) : Deferred<loginRet>
 
     @POST("changePassword")
     fun changePwd(@Body changepwd: ChangePwd) : Deferred<boolRet>

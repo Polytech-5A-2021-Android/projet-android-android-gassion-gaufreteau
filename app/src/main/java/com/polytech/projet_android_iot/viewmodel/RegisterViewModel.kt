@@ -175,7 +175,7 @@ class RegisterViewModel(
             val registerDeferred = MyApiIOT.retrofitService.register(user)
             try {
                 val registerResult = registerDeferred.await()
-                _user.value = registerResult
+                _user.value!!.id = registerResult.id
                 _navigateToHomeFragment.value = _user.value!!.id
             }catch (e: Exception) {
                 Log.i("API ERROR -- Login", "Exception with API -- Using local DB")
