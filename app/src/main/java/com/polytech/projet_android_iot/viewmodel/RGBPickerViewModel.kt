@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.polytech.projet_android_iot.MyApiIOT
 import com.polytech.projet_android_iot.dao.UserIOTDao
 import com.polytech.projet_android_iot.model.PresetsIOT
@@ -45,13 +44,13 @@ class RGBPickerViewModel(
 
     private suspend fun getUser(): UserIOT? {
         return withContext(Dispatchers.IO) {
-            var user = database.get(userID)
+            val user = database.get(userID)
             user
         }
     }
 
     private fun initFakePreset(): PresetsIOT {
-        var preset = PresetsIOT()
+        val preset = PresetsIOT()
         preset.bid = boardID
         preset.led1 = colorPicked1
         preset.led2 = colorPicked2

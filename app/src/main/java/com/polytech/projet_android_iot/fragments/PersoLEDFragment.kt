@@ -5,17 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.polytech.projet_android_iot.R
-import com.polytech.projet_android_iot.databinding.FragmentParamsBinding
 import com.polytech.projet_android_iot.databinding.FragmentPersoLEDBinding
 import com.polytech.projet_android_iot.db.DatabaseIotUser
-import com.polytech.projet_android_iot.viewmodel.ParamsViewModel
 import com.polytech.projet_android_iot.viewmodel.PersoLEDViewModel
-import com.polytech.projet_android_iot.viewmodelfactory.ParamsViewModelFactory
 import com.polytech.projet_android_iot.viewmodelfactory.PersoLEDViewModelFactory
 
 
@@ -29,7 +25,7 @@ class PersoLEDFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_perso_l_e_d, container, false)
@@ -37,7 +33,7 @@ class PersoLEDFragment : Fragment() {
         val uid = args.uid
         val bid = args.bid
         viewModelFactory = PersoLEDViewModelFactory(dataSource,application,uid)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(PersoLEDViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[PersoLEDViewModel::class.java]
 
         binding.viewModel = viewModel
 

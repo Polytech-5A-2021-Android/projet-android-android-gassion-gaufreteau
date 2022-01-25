@@ -16,7 +16,7 @@ import java.lang.Exception
 
 class BoardConnectViewModel(
     val database: UserIOTDao,
-    val databaseBoard: BoardIOTDao,
+    private val databaseBoard: BoardIOTDao,
     application: Application,
     private var userID: Long, // UID
 ) : AndroidViewModel(application){
@@ -128,7 +128,7 @@ class BoardConnectViewModel(
         _boardSynced.value = null
     }
 
-    fun validateSyncAPI(code: Long?) {
+    private fun validateSyncAPI(code: Long?) {
         coroutineScope.launch {
             val verifcode = verifCode(userID, _boardCode.value?.toLong(), code)
             val verifyCodeDeferred = MyApiIOT.retrofitService.verifyCode(verifcode)
@@ -154,12 +154,6 @@ class BoardConnectViewModel(
     private suspend fun insert(board: BoardIOT) {
         withContext(Dispatchers.IO) {
             databaseBoard.insert(board)
-        }
-    }
-
-    private suspend fun getBoard(name: String?): Boolean {
-        return withContext(Dispatchers.IO) {
-            databaseBoard.getBoardByName(name)==null
         }
     }
 

@@ -27,14 +27,14 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         binding.lifecycleOwner = this
 
         viewModelFactory = LoginViewModelFactory(dataSource,application)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[LoginViewModel::class.java]
 
         binding.viewModel = viewModel
 

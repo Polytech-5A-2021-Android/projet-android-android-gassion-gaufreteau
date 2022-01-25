@@ -5,11 +5,8 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.polytech.projet_android_iot.MyApiIOT
-import com.polytech.projet_android_iot.createPreset
 import com.polytech.projet_android_iot.dao.UserIOTDao
-import com.polytech.projet_android_iot.db.DatabaseIotBoard
 import com.polytech.projet_android_iot.db.DatabasePresets
 import com.polytech.projet_android_iot.model.PresetsIOT
 import com.polytech.projet_android_iot.model.UserIOT
@@ -27,7 +24,6 @@ class RegisterRgbViewModel(
 ) : AndroidViewModel(application){
 
     private val databasePresets = DatabasePresets.getInstance(application).presetsIOTDao
-    private val databaseBoards = DatabaseIotBoard.getInstance(application).boardIOTDao
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val _user = MutableLiveData<UserIOT>()
@@ -63,9 +59,9 @@ class RegisterRgbViewModel(
     }
     private fun getPresetsFromAPI() {
         coroutineScope.launch {
-            var getPresetsDeferred = MyApiIOT.retrofitService.getPresets(boardID)
+            val getPresetsDeferred = MyApiIOT.retrofitService.getPresets(boardID)
             try {
-                var listResult = getPresetsDeferred.await()
+                val listResult = getPresetsDeferred.await()
                 _presets.value = listResult
             }catch (e: Exception) {
                 Log.i("API ERROR -- Presets", "Exception with API (CreationList) -- Using local DB")
@@ -74,19 +70,12 @@ class RegisterRgbViewModel(
         }
     }
 
-    private fun initializeUser() {
-        uiScope.launch {
-            _user.value = getUser()
-        }
-    }
-
 
     private fun createPresetFromAPI(preset: PresetsIOT) {
-        val createPreset = createPreset(preset.name!!,preset.led1!!,preset.led2!!,preset.led3!!)
         coroutineScope.launch {
-            var createPresetDeferred = MyApiIOT.retrofitService.createPreset(preset)
+            val createPresetDeferred = MyApiIOT.retrofitService.createPreset(preset)
             try {
-                var presetResult = createPresetDeferred.await()
+                val presetResult = createPresetDeferred.await()
                 Log.i("API -- NewPreset", "Result of preset creation, pid : " + presetResult.confirm)
                 noError()
                 _navigateToHomeFragment.value = preset.id
@@ -99,12 +88,6 @@ class RegisterRgbViewModel(
         }
     }
 
-    private suspend fun getUser(): UserIOT? {
-        return withContext(Dispatchers.IO) {
-            var user = database.get(userID)
-            user
-        }
-    }
 
     override fun onCleared() {
         super.onCleared()

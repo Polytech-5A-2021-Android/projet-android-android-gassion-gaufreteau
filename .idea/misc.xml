@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/axelg/.gradle/caches/transforms-3/60441befdeb37c501e244fa27b5a2c86/transformed/jetified-colorpicker-1.0.8/res/layout/dialog_color_picker.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/activity_main_iotactivity.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/api_item_view.xml" value="0.1" />
@@ -27,6 +28,7 @@
         <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/fragment_register_rgb.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/item_view.xml" value="0.1" />
         <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/app/src/main/res/layout/presets_item_view.xml" value="0.35230677052127024" />
+        <entry key="..\:/Users/axelg/AndroidStudioProjects/ProjetAndroidIOT/projet-android-android-gassion-gaufreteau/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
       </map>
     </option>
   </component>

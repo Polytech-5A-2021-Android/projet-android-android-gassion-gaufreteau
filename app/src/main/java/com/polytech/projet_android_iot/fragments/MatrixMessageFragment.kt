@@ -12,12 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.polytech.projet_android_iot.R
 import com.polytech.projet_android_iot.databinding.FragmentMatrixMessageBinding
-import com.polytech.projet_android_iot.databinding.FragmentParamsBinding
 import com.polytech.projet_android_iot.db.DatabaseIotUser
 import com.polytech.projet_android_iot.viewmodel.MatrixMessageViewModel
-import com.polytech.projet_android_iot.viewmodel.ParamsViewModel
 import com.polytech.projet_android_iot.viewmodelfactory.MatrixMessageViewModelFactory
-import com.polytech.projet_android_iot.viewmodelfactory.ParamsViewModelFactory
 
 
 class MatrixMessageFragment : Fragment() {
@@ -30,7 +27,7 @@ class MatrixMessageFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_matrix_message, container, false)
@@ -38,7 +35,7 @@ class MatrixMessageFragment : Fragment() {
         val uid = args.uid
         val bid = args.bid
         viewModelFactory = MatrixMessageViewModelFactory(dataSource,application,uid,bid)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(MatrixMessageViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[MatrixMessageViewModel::class.java]
 
         binding.viewModel = viewModel
 
@@ -50,7 +47,7 @@ class MatrixMessageFragment : Fragment() {
 
         viewModel.navigateToHomeFragment.observe(viewLifecycleOwner, { res ->
             res?.let {
-                var message = ""
+                val message: String
                 if(res) {
                     message = "Message printed"
                     this.findNavController().navigate(

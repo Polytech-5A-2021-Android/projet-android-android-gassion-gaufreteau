@@ -31,9 +31,9 @@ class LoginViewModel(
     private fun loginFromAPI(user: UserIOT) {
         coroutineScope.launch {
             val loginfo = LoginInfo(user.login,user.password)
-            var loginDeferred = MyApiIOT.retrofitService.login(loginfo)
+            val loginDeferred = MyApiIOT.retrofitService.login(loginfo)
             try {
-                var loginResult = loginDeferred.await()
+                val loginResult = loginDeferred.await()
                 if(loginResult.response) {
                     noError()
                     _navigateToHomeFragment.value = loginResult.id
@@ -81,7 +81,7 @@ class LoginViewModel(
      * The goal is to make to application usable without API
      */
     private suspend fun insertBaseUser() {
-        var usertmp = UserIOT(1,"Axel","Axel")
+        val usertmp = UserIOT(1,"Axel","Axel")
         withContext(Dispatchers.IO) {
             if(database.get(1)==null) {
                 database.insert(usertmp)
@@ -91,7 +91,7 @@ class LoginViewModel(
     }
 
     private suspend fun getUserLoginStatus(login: String?, pwd: String?): Long? {
-        val user = user.value
+        user.value
         return withContext(Dispatchers.IO) {
             val userSel = database.getByLoginAndPwd(login, pwd)
             userSel?.id

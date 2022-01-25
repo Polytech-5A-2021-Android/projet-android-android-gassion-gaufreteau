@@ -12,12 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.polytech.projet_android_iot.R
 import com.polytech.projet_android_iot.databinding.FragmentParamsBinding
-import com.polytech.projet_android_iot.databinding.FragmentRegisterBinding
 import com.polytech.projet_android_iot.db.DatabaseIotUser
 import com.polytech.projet_android_iot.viewmodel.ParamsViewModel
-import com.polytech.projet_android_iot.viewmodel.RegisterViewModel
 import com.polytech.projet_android_iot.viewmodelfactory.ParamsViewModelFactory
-import com.polytech.projet_android_iot.viewmodelfactory.RegisterViewModelFactory
 
 class ParamsFragment : Fragment() {
 
@@ -29,7 +26,7 @@ class ParamsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_params, container, false)
@@ -38,7 +35,7 @@ class ParamsFragment : Fragment() {
         val uid = args.uid
 
         viewModelFactory = ParamsViewModelFactory(dataSource,application,uid)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(ParamsViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[ParamsViewModel::class.java]
 
         binding.viewModel = viewModel
 

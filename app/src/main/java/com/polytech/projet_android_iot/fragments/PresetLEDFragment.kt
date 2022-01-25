@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.polytech.projet_android_iot.R
@@ -29,7 +28,7 @@ class PresetLEDFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_preset_l_e_d, container, false)
@@ -37,7 +36,7 @@ class PresetLEDFragment : Fragment() {
         val uid = args.uid
         val bid = args.bid
         viewModelFactory = PresetLEDViewModelFactory(dataSource,application,uid,bid)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(PresetLEDViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[PresetLEDViewModel::class.java]
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -48,7 +47,7 @@ class PresetLEDFragment : Fragment() {
 
         viewModel.resUse.observe(viewLifecycleOwner, { res ->
             res?.let {
-                var message = ""
+                val message: String
                 if(res) {
                     message = "Successfully used preset"
                     this.findNavController().navigate(PresetLEDFragmentDirections.actionPresetLEDFragmentToPersoMenuFragment(uid,bid))
@@ -61,7 +60,7 @@ class PresetLEDFragment : Fragment() {
         })
 
         binding.liPresetlist.adapter = adapter
-        viewModel.presets.observe(viewLifecycleOwner, Observer {
+        viewModel.presets.observe(viewLifecycleOwner,  {
             it?.let {
                 adapter.submitList(it)
             }

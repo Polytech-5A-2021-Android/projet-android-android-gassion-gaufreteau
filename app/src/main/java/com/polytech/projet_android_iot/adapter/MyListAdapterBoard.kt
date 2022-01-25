@@ -9,7 +9,7 @@ import com.polytech.projet_android_iot.model.BoardIOT
 
 class MyListAdapterBoard(
     private val clickListener: BoardListener
-) : ListAdapter<BoardIOT, MyListAdapterBoard.ViewHolder>(BoardDiffCallback {}) {
+) : ListAdapter<BoardIOT, MyListAdapterBoard.ViewHolder>(BoardDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position)!!, clickListener)

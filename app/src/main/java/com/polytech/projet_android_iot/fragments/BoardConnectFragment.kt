@@ -27,7 +27,7 @@ class BoardConnectFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
         val dataSourceBoard = DatabaseIotBoard.getInstance(application).boardIOTDao
@@ -35,7 +35,7 @@ class BoardConnectFragment : Fragment() {
         val args = BoardConnectFragmentArgs.fromBundle(requireArguments())
         val uid = args.uid
         viewModelFactory = BoardConnectViewModelFactory(dataSource,dataSourceBoard,application,uid)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(BoardConnectViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[BoardConnectViewModel::class.java]
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -51,15 +51,14 @@ class BoardConnectFragment : Fragment() {
         viewModel.boardSynced.observe(viewLifecycleOwner, { ret ->
             ret?.let {
                 //Change button Detected or not
-                var message = ""
-                if(ret) {
+                val message: String = if(ret) {
                     this.findNavController().navigate(
                         BoardConnectFragmentDirections
                             .actionBoardConnectFragmentToHomeFragment(uid))
                     Log.i("Navigating to HOME", "Successful sync - uid : $uid")
-                    message = "Board synced"
+                    "Board synced"
                 }else{
-                    message = "Board not synced"
+                    "Board not synced"
                 }
                 Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
                 viewModel.boardSyncDone()
@@ -69,11 +68,10 @@ class BoardConnectFragment : Fragment() {
         viewModel.boardDetected.observe(viewLifecycleOwner, { ret ->
             ret?.let {
                 //Change button Detected or not
-                var message = ""
-                if(ret) {
-                    message = "Board detected"
+                val message: String = if(ret) {
+                    "Board detected"
                 }else{
-                    message = "Board not detected"
+                    "Board not detected"
                 }
                 viewModel._boardSyncMessage.value = message
                 viewModel.boardDetectionDone()
@@ -83,12 +81,16 @@ class BoardConnectFragment : Fragment() {
         viewModel.errorRegistering.observe(viewLifecycleOwner, { errorCode ->
             errorCode?.let {
                 var message = ""
-                if(errorCode==1L){
-                    message = "Confirmation code is invalid"
-                }else if(errorCode==2L){
-                    message = "Board code is not correct"
-                }else if(errorCode==3L){
-                    message = "This board already exists in the DB"
+                when (errorCode) {
+                    1L -> {
+                        message = "Confirmation code is invalid"
+                    }
+                    2L -> {
+                        message = "Board code is not correct"
+                    }
+                    3L -> {
+                        message = "This board already exists in the DB"
+                    }
                 }
                 Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
             }

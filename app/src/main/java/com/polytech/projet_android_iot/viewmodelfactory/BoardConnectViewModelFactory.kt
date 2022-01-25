@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.polytech.projet_android_iot.dao.BoardIOTDao
 import com.polytech.projet_android_iot.dao.UserIOTDao
 import com.polytech.projet_android_iot.viewmodel.BoardConnectViewModel
-import com.polytech.projet_android_iot.viewmodel.ParamsViewModel
 
 class BoardConnectViewModelFactory(
     private val dataSource: UserIOTDao,

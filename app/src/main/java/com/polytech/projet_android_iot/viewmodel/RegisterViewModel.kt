@@ -17,7 +17,7 @@ class RegisterViewModel(
     application: Application,
 ) : AndroidViewModel(application)
 {
-    val countries = arrayListOf<String>("France", "Djibouti", "Ouzbékistan")
+    val countries = arrayListOf("France", "Djibouti", "Ouzbékistan")
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val _user = MutableLiveData<UserIOT>()

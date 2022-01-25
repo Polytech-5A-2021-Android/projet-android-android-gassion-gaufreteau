@@ -1,7 +1,6 @@
 package com.polytech.projet_android_iot.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +27,7 @@ class RGBPickerFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_r_g_b_picker, container, false)
@@ -36,7 +35,7 @@ class RGBPickerFragment : Fragment() {
         val uid = args.uid
         val bid = args.bid
         viewModelFactory = RGBPickerViewModelFactory(dataSource,application,uid,bid)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(RGBPickerViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[RGBPickerViewModel::class.java]
 
         binding.viewModel = viewModel
 
@@ -59,7 +58,7 @@ class RGBPickerFragment : Fragment() {
             viewModel.setColor(1,hex)
         }
         binding.btOpenpicker1.setOnClickListener {
-            colorPickerDialog1.show();
+            colorPickerDialog1.show()
         }
 
         //CP2
@@ -69,7 +68,7 @@ class RGBPickerFragment : Fragment() {
             viewModel.setColor(2,hex)
         }
         binding.btOpenpicker2.setOnClickListener {
-            colorPickerDialog2.show();
+            colorPickerDialog2.show()
         }
 
         //CP 3
@@ -79,13 +78,13 @@ class RGBPickerFragment : Fragment() {
             viewModel.setColor(3,hex)
         }
         binding.btOpenpicker3.setOnClickListener {
-            colorPickerDialog3.show();
+            colorPickerDialog3.show()
         }
 
 
         viewModel.colors.observe(viewLifecycleOwner, { res ->
             res?.let {
-                var message = ""
+                val message: String
                 if(res) {
                     message = "Successfully used colors"
                     this.findNavController().navigate(RGBPickerFragmentDirections.actionRGBPickerFragmentToPersoMenuFragment(uid,bid))

@@ -10,7 +10,7 @@ import com.polytech.projet_android_iot.model.PresetsIOT
 
 class MyListAdapterPresets(
     private val clickListener: PresetsListener
-) : ListAdapter<PresetsIOT, MyListAdapterPresets.ViewHolder>(PresetsDiffCallback {}) {
+) : ListAdapter<PresetsIOT, MyListAdapterPresets.ViewHolder>(PresetsDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position)!!, clickListener)
@@ -32,7 +32,7 @@ class MyListAdapterPresets(
             binding.executePendingBindings()
         }
 
-        fun parseColor(str: String?): Int {
+        private fun parseColor(str: String?): Int {
             if(str.isNullOrEmpty()) {
                 return Color.WHITE
             }

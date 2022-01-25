@@ -29,13 +29,13 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
 
         viewModelFactory = RegisterViewModelFactory(dataSource,application)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[RegisterViewModel::class.java]
 
         binding.viewModel = viewModel
 
@@ -54,7 +54,7 @@ class RegisterFragment : Fragment() {
         }
 
         val spinner = binding.spCountries
-        spinner.adapter = this.context?.let { ArrayAdapter<String>(it, android.R.layout.simple_dropdown_item_1line, viewModel.countries) }
+        spinner.adapter = this.context?.let { ArrayAdapter(it, android.R.layout.simple_dropdown_item_1line, viewModel.countries) }
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
@@ -77,7 +77,7 @@ class RegisterFragment : Fragment() {
         val m = cal.get(Calendar.MONTH)
         val d = cal.get(Calendar.DAY_OF_MONTH)
         datePicker.init(y,m,d) {
-            view, year, month, day ->
+                _, year, month, day ->
             val month = month+1
             val date = "$day/$month/$year"
             val msg = "You Selected: $date"

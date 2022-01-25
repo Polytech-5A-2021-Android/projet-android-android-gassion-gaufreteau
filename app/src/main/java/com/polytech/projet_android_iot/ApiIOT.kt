@@ -6,27 +6,19 @@ import com.polytech.projet_android_iot.model.BoardIOT
 import com.polytech.projet_android_iot.model.PresetsIOT
 import com.polytech.projet_android_iot.model.UserIOT
 import com.squareup.moshi.Json
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
-import okhttp3.OkHttpClient
-
-import okhttp3.logging.HttpLoggingInterceptor
-
-
 
 
 private const val BASE_URL = "http://78.198.193.139:8080/"
 
-private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
 
 private var retrofit = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
@@ -122,14 +114,6 @@ data class DispayMess(
     @SerializedName("message") val message: String?,
 )
 
-
-data class createPreset(
-    @SerializedName("name") val name: String,
-    @SerializedName("led1") val led1: String,
-    @SerializedName("led2") val led2: String,
-    @SerializedName("led3") val led3: String
-
-)
 
 data class switchSD(
     @SerializedName("boardID") val boardID: Long?,

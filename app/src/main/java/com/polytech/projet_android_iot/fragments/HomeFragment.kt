@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.polytech.projet_android_iot.R
 import com.polytech.projet_android_iot.adapter.BoardListener
@@ -29,7 +27,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
         val dataSourceBoard = DatabaseIotBoard.getInstance(application).boardIOTDao
@@ -39,7 +37,7 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModelFactory = HomeViewModelFactory(dataSource,dataSourceBoard,application,uid)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[HomeViewModel::class.java]
         binding.viewModel = viewModel
 
         val adapter = MyListAdapterBoard(BoardListener { boardid ->
@@ -50,7 +48,7 @@ class HomeFragment : Fragment() {
         })
         binding.liBoardlist.adapter = adapter
 
-        viewModel.boards.observe(viewLifecycleOwner, Observer {
+        viewModel.boards.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.submitList(it)
             }

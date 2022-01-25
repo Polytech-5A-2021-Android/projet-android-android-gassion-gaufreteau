@@ -29,7 +29,7 @@ class PresetLEDViewModel(
     private val _presets = MutableLiveData<List<PresetsIOT>>()
     val presets: LiveData<List<PresetsIOT>>
         get() = _presets
-    private val _resUse = MutableLiveData<Boolean??>()
+    private val _resUse = MutableLiveData<Boolean?>()
     val resUse: MutableLiveData<Boolean?>
         get() = _resUse
 
@@ -58,9 +58,9 @@ class PresetLEDViewModel(
 
     private fun getPresetsFromAPI() {
         coroutineScope.launch {
-            var getPresetsDeferred = MyApiIOT.retrofitService.getPresets(boardID)
+            val getPresetsDeferred = MyApiIOT.retrofitService.getPresets(boardID)
             try {
-                var listResult = getPresetsDeferred.await()
+                val listResult = getPresetsDeferred.await()
                 _presets.value = listResult
             }catch (e: Exception) {
                 Log.i("API ERROR -- Presets", "Exception with API -- Using local DB")
@@ -98,7 +98,7 @@ class PresetLEDViewModel(
 
     private suspend fun getUser(): UserIOT? {
         return withContext(Dispatchers.IO) {
-            var user = database.get(userID)
+            val user = database.get(userID)
             user
         }
     }

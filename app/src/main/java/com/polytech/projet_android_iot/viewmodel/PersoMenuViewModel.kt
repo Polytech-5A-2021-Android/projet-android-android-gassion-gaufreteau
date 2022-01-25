@@ -5,10 +5,8 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.polytech.projet_android_iot.dao.UserIOTDao
 import com.polytech.projet_android_iot.db.DatabasePresets
-import com.polytech.projet_android_iot.model.BoardIOT
 import com.polytech.projet_android_iot.model.PresetsIOT
 import com.polytech.projet_android_iot.model.UserIOT
 import kotlinx.coroutines.*
@@ -65,7 +63,7 @@ class PersoMenuViewModel(
 
     private suspend fun getUser(): UserIOT? {
         return withContext(Dispatchers.IO) {
-            var user = database.get(userID)
+            val user = database.get(userID)
             user
         }
     }

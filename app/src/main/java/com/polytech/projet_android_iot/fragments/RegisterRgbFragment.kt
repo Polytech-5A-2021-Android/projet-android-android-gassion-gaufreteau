@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.polytech.projet_android_iot.R
@@ -29,7 +28,7 @@ class RegisterRgbFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseIotUser.getInstance(application).userIOTDao
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register_rgb, container, false)
@@ -40,7 +39,7 @@ class RegisterRgbFragment : Fragment() {
         val led2 = args.led2
         val led3 = args.led3
         viewModelFactory = RegisterRgbViewModelFactory(dataSource,application,uid,bid,led1,led2,led3)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(RegisterRgbViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory)[RegisterRgbViewModel::class.java]
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
@@ -48,7 +47,7 @@ class RegisterRgbFragment : Fragment() {
         val adapter = MyListAdapterPresets(PresetsListener {})
 
         binding.liPresetlist.adapter = adapter
-        viewModel.presets.observe(viewLifecycleOwner, Observer {
+        viewModel.presets.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.submitList(it)
             }
