@@ -48,13 +48,35 @@ class BoardConnectFragment : Fragment() {
             btValidate.text = getString(R.string.validate)
         }
 
-        viewModel.navigateToHomeFragment.observe(viewLifecycleOwner, { uid ->
-            uid?.let {
-                this.findNavController().navigate(
-                    BoardConnectFragmentDirections
-                        .actionBoardConnectFragmentToHomeFragment(uid))
-                Log.i("Navigating to HOME", "Successful sync - uid : $uid")
-                viewModel.doneNavigating()
+        viewModel.boardSynced.observe(viewLifecycleOwner, { ret ->
+            ret?.let {
+                //Change button Detected or not
+                var message = ""
+                if(ret) {
+                    this.findNavController().navigate(
+                        BoardConnectFragmentDirections
+                            .actionBoardConnectFragmentToHomeFragment(uid))
+                    Log.i("Navigating to HOME", "Successful sync - uid : $uid")
+                    message = "Board synced"
+                }else{
+                    message = "Board not synced"
+                }
+                Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
+                viewModel.boardSyncDone()
+            }
+        })
+
+        viewModel.boardDetected.observe(viewLifecycleOwner, { ret ->
+            ret?.let {
+                //Change button Detected or not
+                var message = ""
+                if(ret) {
+                    message = "Board detected"
+                }else{
+                    message = "Board not detected"
+                }
+                viewModel._boardSyncMessage.value = message
+                viewModel.boardDetectionDone()
             }
         })
 

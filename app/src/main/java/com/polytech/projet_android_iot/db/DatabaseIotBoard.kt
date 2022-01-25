@@ -9,7 +9,7 @@ import com.polytech.projet_android_iot.dao.BoardIOTDao
 import com.polytech.projet_android_iot.model.BoardIOT
 
 
-@Database(entities = [BoardIOT::class], version = 5, exportSchema = false)
+@Database(entities = [BoardIOT::class], version = 6, exportSchema = false)
 abstract class DatabaseIotBoard : RoomDatabase() {
     abstract val boardIOTDao: BoardIOTDao
     companion object {

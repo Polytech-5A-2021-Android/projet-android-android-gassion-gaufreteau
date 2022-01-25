@@ -24,11 +24,19 @@ class MyListAdapterPresets(
 
         fun bind(item: PresetsIOT, clickListener: PresetsListener) {
             binding.preset = item
-            binding.tvColor1.setBackgroundColor(Color.parseColor(item.led1))
-            binding.tvColor2.setBackgroundColor(Color.parseColor(item.led2))
-            binding.tvColor3.setBackgroundColor(Color.parseColor(item.led3))
+
+            binding.tvColor1.setBackgroundColor(parseColor(item.led1))
+            binding.tvColor2.setBackgroundColor(parseColor(item.led2))
+            binding.tvColor3.setBackgroundColor(parseColor(item.led3))
             binding.clickListener = clickListener
             binding.executePendingBindings()
+        }
+
+        fun parseColor(str: String?): Int {
+            if(str.isNullOrEmpty()) {
+                return Color.WHITE
+            }
+            return Color.parseColor(str)
         }
 
         companion object {

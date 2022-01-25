@@ -74,9 +74,9 @@ class HomeViewModel(
 
     private fun getBoardsFromAPI() {
         coroutineScope.launch {
-            var getPresetsDeferred = MyApiIOT.retrofitService.getBoards()
+            val getPresetsDeferred = MyApiIOT.retrofitService.getBoardsById(userID)
             try {
-                var listResult = getPresetsDeferred.await()
+                val listResult = getPresetsDeferred.await()
                 _boards.value = listResult
             }catch (e: Exception) {
                 Log.i("API ERROR -- Boards", "Exception with API -- Using local DB")

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.polytech.projet_android_iot.dao.UserIOTDao
 import com.polytech.projet_android_iot.model.UserIOT
 
-@Database(entities = [UserIOT::class], version = 6, exportSchema = false)
+@Database(entities = [UserIOT::class], version = 7, exportSchema = false)
 abstract class DatabaseIotUser : RoomDatabase() {
     abstract val userIOTDao: UserIOTDao
     companion object {

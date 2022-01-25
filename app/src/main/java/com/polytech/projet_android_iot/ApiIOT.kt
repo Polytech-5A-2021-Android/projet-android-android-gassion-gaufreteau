@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.polytech.projet_android_iot.model.BoardIOT
 import com.polytech.projet_android_iot.model.PresetsIOT
-import com.polytech.projet_android_iot.model.User
 import com.polytech.projet_android_iot.model.UserIOT
 import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
@@ -12,7 +11,6 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -43,6 +41,15 @@ interface ApiIOT {
 
     @GET("boards")
     fun getBoards(): Deferred<List<BoardIOT>>
+
+    @POST("syncBoard")
+    fun syncBoard(@Body boardCode: Long?): Deferred<boolRet>
+
+    @POST("verifyCode")
+    fun verifyCode(@Body verifcode: verifCode?): Deferred<boolRet>
+
+    @GET("boards/{uid}")
+    fun getBoardsById(@Path("uid") uid: Long): Deferred<List<BoardIOT>>
 
     @POST("login")
     fun login(@Body logInfo: LoginInfo) : Deferred<loginRet>
@@ -127,4 +134,10 @@ data class createPreset(
 data class switchSD(
     @SerializedName("boardID") val boardID: Long?,
     @SerializedName("_switch") val switch: Boolean
+)
+
+data class verifCode(
+    @Json(name="uid") val uid: Long,
+    @Json(name="bid") val bid: Long?,
+    @Json(name="code") val code: Long?,
 )
