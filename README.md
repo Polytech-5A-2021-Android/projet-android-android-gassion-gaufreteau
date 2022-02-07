@@ -3,6 +3,13 @@
 
 GASSION Axel - GAUFRETEAU Simon -- 5A INFO
 
+## Liens
+
+Repo code du board : https://github.com/SimonGaufreteau/IOT-project (Rapport ici)
+
+Repo backend : https://github.com/SimonGaufreteau/BackendIOT
+
+
 ## Concept
 
 L'application créée a pour but d'intéragir avec un objet connecté.
